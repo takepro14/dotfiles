@@ -48,4 +48,3 @@ fi
 zplug load
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-export PATH="$HOME/bin:$PATH"

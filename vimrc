@@ -22,6 +22,8 @@ set wildmenu
 set wildmode=longest:full,full
 set wildoptions=pum
 set wildignore+=*/.git/*,*/node_modules/*
+set grepprg=rg\ --vimgrep\ --smart-case " Require ripgrep
+set grepformat=%f:%l:%c:%m " Require ripgrep
 
 " Keymaps
 nnoremap k gk

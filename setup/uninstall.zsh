@@ -1,22 +1,27 @@
 #!/bin/zsh
 
-# Remove repository
+echo "\n=== Remove repository ==="
 if [[ -e "${HOME}/.dotfiles" ]]; then
   rm -rf "${HOME}/.dotfiles"
 fi
 
-# Unlink files
-[[ -e "${HOME}/.vimrc" ]] && rm "${HOME}/.vimrc"
-[[ -e "${HOME}/.tmux.conf" ]] && rm "${HOME}/.tmux.conf"
-[[ -e "${HOME}/.zshrc" ]] && rm "${HOME}/.zshrc"
-[[ -e "${HOME}/.gitconfig" ]] && rm "${HOME}/.gitconfig"
+echo "\n=== Unlink files ==="
+files=(vimrc tmux.conf zshrc gitconfig)
+for file in "${files[@]}"; do
+  if [[ -e "${HOME}/.${file}" ]]; then
+    rm "${HOME}/.${file}"
+  fi
+done
 
-# Uninstall zplug
+echo "\n=== Uninstall zplug ==="
 if [[ -d "${HOME}/.zplug" ]]; then
   rm -rf "${HOME}/.zplug"
 fi
 
-# Uninstall tmux
-if command -v tmux &>/dev/null; then
-  brew uninstall tmux
-fi
+echo "\n=== Uninstall packages ==="
+packages=(tmux ripgrep)
+for package in "${packages[@]}"; do
+  if command -v "${package}" &>/dev/null; then
+    brew uninstall "${package}"
+  fi
+done

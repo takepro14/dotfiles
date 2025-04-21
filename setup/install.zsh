@@ -1,25 +1,29 @@
 #!/bin/zsh
 
-# Clone repository
+echo "\n=== Clone repository ==="
 if [[ ! -e "${HOME}/.dotfiles" ]]; then
   git clone https://github.com/takepro14/dotfiles.git "${HOME}/.dotfiles"
-else
-  git -C "${HOME}/.dotfiles" pull
 fi
 
-# Link files
-ln -sfv "${HOME}/.dotfiles/vimrc" "${HOME}/.vimrc"
-ln -sfv "${HOME}/.dotfiles/tmux.conf" "${HOME}/.tmux.conf"
-ln -sfv "${HOME}/.dotfiles/zshrc" "${HOME}/.zshrc"
-ln -sfv "${HOME}/.dotfiles/gitconfig" "${HOME}/.gitconfig"
+echo "\n=== Link files ==="
+files=(vimrc tmux.conf zshrc gitconfig)
+for file in "${files[@]}"; do
+  if [[ ! -e "${HOME}/.${file}" ]]; then
+    ln -sv "${HOME}/.dotfiles/${file}" "${HOME}/.${file}"
+  fi
+done
 
-# Install zplug
+echo "\n=== Install zplug ==="
 if [[ ! -d "${HOME}/.zplug" ]]; then
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+  # Ensure synchronous setup before loading plugins by not using zplug's official install script.
+  git clone https://github.com/zplug/zplug "${HOME}/.zplug"
 fi
-source ${HOME}/.zshrc
+source "${HOME}/.zshrc"
 
-# Install tmux
-if ! command -v tmux &>/dev/null; then
-  brew install tmux
-fi
+echo "\n=== Install packages ==="
+packages=(tmux ripgrep)
+for package in "${packages[@]}"; do
+  if ! command -v "${package}" &>/dev/null; then
+    brew install "${package}"
+  fi
+done

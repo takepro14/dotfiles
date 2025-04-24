@@ -48,6 +48,8 @@ vnoremap J 10j
 vnoremap K 10k
 nnoremap Y y$
 xnoremap * y:let @/ = '\V' . escape(@", '\')<CR>n
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 " Utilities
 autocmd BufWritePre * %s/\s\+$//e

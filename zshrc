@@ -22,8 +22,8 @@ stty -ixon # Disable XON/XOFF flow control to allow Ctrl+S for history search.
 # Keymaps
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
-bindkey "^P" up-line-or-history
-bindkey "^N" down-line-or-history
+bindkey '^P' history-search-backward
+bindkey '^N' history-search-forward
 bindkey -e # enable emacs style key bind
 
 # Aliases

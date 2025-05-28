@@ -50,6 +50,10 @@ nnoremap Y y$
 xnoremap * y:let @/ = '\V' . escape(@", '\')<CR>n
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
 
 " Utilities
 autocmd BufWritePre * %s/\s\+$//e

@@ -5,7 +5,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export LANG=en_US.UTF-8
 export EDITOR=vim
 export PURE_PROMPT_SYMBOL="$"
-export PATH="$HOME/go/bin:$PATH"
 
 # Options
 setopt nobeep
